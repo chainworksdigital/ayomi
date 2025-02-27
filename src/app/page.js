@@ -1,4 +1,4 @@
-
+import React from 'react'
 import Hero from "@/app/sections/Hero";
 import About from "@/app/sections/About";
 import Courses from "@/app/sections/Courses";
@@ -6,9 +6,12 @@ import Testimonials from "@/app/sections/Testimonials";
 import CTA from "@/app/sections/CTA";
 import Contact from "@/app/sections/Contact";
 
-export default function Home() {
+ 
+
+export default function page() {
   return (
-    <main>
+    <div>
+          <main>
       <section id="home">
         <Hero />
       </section>
@@ -28,5 +31,6 @@ export default function Home() {
         <Contact />
       </section>
     </main>
-  );
+    </div>
+  )
 }
