@@ -24,9 +24,9 @@ export default function page() {
       <section id="testimonials">
         <Testimonials />
       </section>
-      {/* <section id="cta">
+      <section id="cta">
         <CTA />
-      </section> */}
+      </section>
       <section id="contact">
         <Contact />
       </section>
