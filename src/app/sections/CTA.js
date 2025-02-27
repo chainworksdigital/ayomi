@@ -1,8 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Lottie from "lottie-react";
-import blockchainAnimation from "../../../public/animations/Card-Animation4.json";
+import dynamic from "next/dynamic";
+
+// Dynamically import Lottie to prevent SSR hydration mismatch
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
+
+// Correct animation import (direct path from public)
+import blockchainAnimation from "/animations/Card-Animation4.json"; 
 
 const CTA = () => {
   return (
