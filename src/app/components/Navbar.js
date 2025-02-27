@@ -20,24 +20,25 @@ const Navbar = () => {
 
   // Handle scrolling event to detect active section
   useEffect(() => {
-    if (typeof window === "undefined" || typeof document === "undefined") return;
-  
+    if (typeof window === "undefined") return;
+    
     const handleScroll = () => {
       let currentSection = "home";
-  
       navItems.forEach((item) => {
-        const section = document.getElementById(item.id);
-        if (section) {
-          const sectionTop = section.offsetTop - 120;
-          if (window.scrollY >= sectionTop) {
-            currentSection = item.id;
+        if (typeof document !== "undefined") {
+          const section = document.getElementById(item.id);
+          if (section) {
+            const sectionTop = section.getBoundingClientRect().top + window.scrollY - 120;
+            if (window.scrollY >= sectionTop) {
+              currentSection = item.id;
+            }
           }
         }
       });
-  
+
       setActive(currentSection);
     };
-  
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
