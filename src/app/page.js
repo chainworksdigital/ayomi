@@ -12,21 +12,21 @@ export default function page() {
   return (
     <div>
           <main>
-      <section id="home">
+       <section id="home">
         <Hero />
       </section>
-      <section id="about">
+     <section id="about">
         <About />
       </section>
-      <section id="courses">
+      {/* <section id="courses">
         <Courses />
-      </section>
+      </section> */}
       <section id="testimonials">
         <Testimonials />
       </section>
-      <section id="cta">
+      {/* <section id="cta">
         <CTA />
-      </section>
+      </section> */}
       <section id="contact">
         <Contact />
       </section>
