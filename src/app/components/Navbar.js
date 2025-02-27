@@ -20,7 +20,7 @@ const Navbar = () => {
 
   // Handle scrolling event to detect active section
   useEffect(() => {
-    if (typeof window === "undefined") return; // Prevent running on the server
+    if (typeof window === "undefined" || typeof document === "undefined") return;
   
     const handleScroll = () => {
       let currentSection = "home";
