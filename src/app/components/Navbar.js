@@ -20,9 +20,11 @@ const Navbar = () => {
 
   // Handle scrolling event to detect active section
   useEffect(() => {
+    if (typeof window === "undefined") return; // Prevent running on the server
+  
     const handleScroll = () => {
       let currentSection = "home";
-
+  
       navItems.forEach((item) => {
         const section = document.getElementById(item.id);
         if (section) {
@@ -32,13 +34,14 @@ const Navbar = () => {
           }
         }
       });
-
+  
       setActive(currentSection);
     };
-
+  
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  
 
   return (
     <motion.nav
