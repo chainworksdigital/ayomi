@@ -1,4 +1,3 @@
-"use client"; // ✅ Forces it to run only on the client
 
 import Hero from "@/app/sections/Hero";
 import About from "@/app/sections/About";
