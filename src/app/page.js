@@ -1,3 +1,6 @@
+"use client";
+
+
 import Hero from "@/app/sections/Hero";
 import About from "@/app/sections/About";
 import Courses from "@/app/sections/Courses";
