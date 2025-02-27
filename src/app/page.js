@@ -1,42 +1,33 @@
-// "use client"; // ✅ Forces it to run only on the client
+"use client"; // ✅ Forces it to run only on the client
 
-// import Hero from "@/app/sections/Hero";
-// import About from "@/app/sections/About";
-// import Courses from "@/app/sections/Courses";
-// import Testimonials from "@/app/sections/Testimonials";
-// import CTA from "@/app/sections/CTA";
-// import Contact from "@/app/sections/Contact";
+import Hero from "@/app/sections/Hero";
+import About from "@/app/sections/About";
+import Courses from "@/app/sections/Courses";
+import Testimonials from "@/app/sections/Testimonials";
+import CTA from "@/app/sections/CTA";
+import Contact from "@/app/sections/Contact";
 
-// export default function Home() {
-//   return (
-//     <main>
-//       <section id="home">
-//         <Hero />
-//       </section>
-//       <section id="about">
-//         <About />
-//       </section>
-//       <section id="courses">
-//         <Courses />
-//       </section>
-//       <section id="testimonials">
-//         <Testimonials />
-//       </section>
-//       <section id="cta">
-//         <CTA />
-//       </section>
-//       <section id="contact">
-//         <Contact />
-//       </section>
-//     </main>
-//   );
-// }
-import React from 'react'
-
-export default function page() {
+export default function Home() {
   return (
-    <div>
-      handleScroll
-    </div>
-  )
+    <main>
+      <section id="home">
+        <Hero />
+      </section>
+      <section id="about">
+        <About />
+      </section>
+      <section id="courses">
+        <Courses />
+      </section>
+      <section id="testimonials">
+        <Testimonials />
+      </section>
+      <section id="cta">
+        <CTA />
+      </section>
+      <section id="contact">
+        <Contact />
+      </section>
+    </main>
+  );
 }
