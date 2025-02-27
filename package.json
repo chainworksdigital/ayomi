@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@netlify/plugin-nextjs": "^5.9.4",
     "eslint": "^9.21.0",
     "framer-motion": "^10.18.0",
     "gsap": "^3.12.7",
