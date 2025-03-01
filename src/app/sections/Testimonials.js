@@ -1,133 +1,193 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-// Testimonials data with unique styles
 const testimonialsData = [
   {
     name: "Tejashree Gaidhani",
     location: "Pune, India",
     image: "/images/tejashreeMaam.png",
     feedback:
-      "The AI & ML course was phenomenal! The hands-on projects and in-depth explanations helped me land my dream job in Data Science.",
+      "This is one of the best courses designed, perfectly structured for students. As part of the course creation team, I can confidently say that the hands-on learning experience makes it a must for anyone looking to excel in AI & ML.",
     bgColor: "bg-gradient-to-r from-yellow-500 to-yellow-800",
     textColor: "text-yellow-300",
     borderColor: "border-yellow-400",
-    isFeatured: true, // This will be emphasized
   },
   {
-    name: "Prem Sadangi",
-    location: "Pune, India",
+    name: "Premchand Sadangi",
+    location: "Odisha, India",
     image: "/images/sanu.png",
     feedback:
-      "I had zero knowledge of AI before joining. The structured learning path and real-world projects gave me confidence in the field!",
+      "I did this course and got a job in AI/ML and Python. The structured approach and real-world projects helped me master the concepts with confidence.",
     bgColor: "bg-gradient-to-r from-green-500 to-green-800",
     textColor: "text-green-300",
     borderColor: "border-green-400",
   },
   {
     name: "Uttara Sawant",
-    location: "Pen, India",
+    location: "Pune, India",
     image: "/images/uttara.png",
     feedback:
-      "The best decision I made was enrolling in this course. The interactive sessions and expert mentorship helped me upskill efficiently.",
+      "I did this course and secured a job at the same company that designed the curriculum. The industry-relevant projects and expert mentorship played a crucial role in my career transition.",
     bgColor: "bg-gradient-to-r from-blue-500 to-blue-800",
     textColor: "text-blue-300",
     borderColor: "border-blue-400",
   },
+  {
+    name: "Balu Gayke",
+    location: "Mumbai, India",
+    image: "/images/balu.png",
+    feedback:
+      "This course transformed my understanding of AI & ML. The real-world case studies and hands-on approach helped me land my first AI research internship!",
+    bgColor: "bg-gradient-to-r from-purple-500 to-purple-800",
+    textColor: "text-purple-300",
+    borderColor: "border-purple-400",
+  },
+  {
+    name: "Sankalp Racchewar",
+    location: "Nanded, India",
+    image: "/images/me.png",
+    feedback:
+      "From beginner to expert, this course guided me through every step. The interactive lessons and practical assignments helped me secure a job as a data analyst.",
+    bgColor: "bg-gradient-to-r from-pink-500 to-pink-800",
+    textColor: "text-pink-300",
+    borderColor: "border-pink-400",
+  },
+  {
+    name: "Snehal Kathale",
+    location: "Pune, India",
+    image: "/images/snehal.png",
+    feedback:
+      "This course was a game-changer! The support from mentors and the in-depth content helped me switch careers and become an AI engineer.",
+    bgColor: "bg-gradient-to-r from-red-500 to-red-800",
+    textColor: "text-red-300",
+    borderColor: "border-red-400",
+  },
+  {
+    name: "Harikrishna Boomen",
+    location: "Solapur, India",
+    image: "/images/hari.png",
+    feedback:
+      "This program gave me the confidence to work on AI/ML projects from scratch. The mentorship and hands-on experience made all the difference in my learning journey.",
+    bgColor: "bg-gradient-to-r from-teal-500 to-teal-800",
+    textColor: "text-teal-300",
+    borderColor: "border-teal-400",
+  },
 ];
 
 const Testimonials = () => {
-  const [testimonials, setTestimonials] = useState([]);
+  const [index, setIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const totalTestimonials = testimonialsData.length;
 
-  // Ensure hydration issue is avoided by loading data only on mount
   useEffect(() => {
-    setTestimonials(testimonialsData);
+    const interval = setInterval(() => {
+      handleNext();
+    }, 5000);
+    return () => clearInterval(interval);
   }, []);
 
+  const handleNext = () => {
+    if (!isAnimating) {
+      setIsAnimating(true);
+      setDirection(1);
+      setIndex((prev) => (prev + 1) % totalTestimonials);
+    }
+  };
+
+  const handlePrev = () => {
+    if (!isAnimating) {
+      setIsAnimating(true);
+      setDirection(-1);
+      setIndex((prev) => (prev === 0 ? totalTestimonials - 1 : prev - 1));
+    }
+  };
+
+  const variants = {
+    enter: (direction) => ({
+      x: direction === 1 ? "100%" : "-100%",
+      opacity: 0,
+      scale: 0.8,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.5, onComplete: () => setIsAnimating(false) },
+    },
+    exit: (direction) => ({
+      x: direction === 1 ? "-100%" : "100%",
+      opacity: 0,
+      scale: 0.8,
+    }),
+  };
+
   return (
-    <section
-      id="testimonials-section"
-      className="relative min-h-screen flex flex-col items-center justify-center px-6 md:px-20 py-12 bg-gray-900 text-white overflow-hidden"
-    >
-      {/* Section Title */}
+    <section className="relative flex flex-col items-center justify-center px-6 py-12 bg-gray-900 text-white overflow-hidden">
       <motion.h2
         initial={{ opacity: 0, y: -30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.5 }}
-        viewport={{ once: true }}
+        animate={{ opacity: 1, y: 0 }}
         className="text-4xl md:text-5xl font-extrabold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-400"
       >
         What Our Students Say
       </motion.h2>
 
-      {/* Testimonials Container */}
-      <div className="relative w-full max-w-7xl flex flex-col items-center md:items-start">
-        {testimonials.map((testimonial, index) => (
+      <div className="relative w-full max-w-6xl h-[600px] overflow-hidden">
+        <AnimatePresence initial={false} custom={direction}>
           <motion.div
-            key={testimonial.name} // ✅ Unique key for hydration fix
-            initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut", delay: index * 0.3 }}
-            viewport={{ once: true }}
-            className={`relative flex flex-col md:flex-row items-center gap-6 md:gap-12 p-6 md:p-10 rounded-xl shadow-lg w-full max-w-4xl 
-              ${testimonial.bgColor} ${index % 2 === 0 ? "md:ml-0 md:mr-auto" : "md:ml-auto md:mr-0"} mb-8`}
+            key={index}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
+              w-[80vw] md:w-[60vw] flex flex-col items-center text-center 
+              px-6 py-10 rounded-xl shadow-lg border-4 
+              ${testimonialsData[index].bgColor} ${testimonialsData[index].borderColor}`}
+            style={{ originX: 0.5, originY: 0.5 }}
           >
-            {/* Testimonial Image */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.3 }}
-              viewport={{ once: true }}
-              className={`rounded-full overflow-hidden border-4 shadow-md ${testimonial.borderColor} ${
-                testimonial.isFeatured
-                  ? "w-44 h-44 md:w-56 md:h-56" // Bigger for featured
-                  : "w-32 h-32 md:w-48 md:h-48"
-              }`}
-            >
+            <div className="rounded-full overflow-hidden border-4 shadow-md w-32 h-32 md:w-48 md:h-48">
               <Image
-                src={testimonial.image}
-                alt={testimonial.name}
+                src={testimonialsData[index].image}
+                alt={testimonialsData[index].name}
                 width={200}
                 height={200}
                 className="object-cover w-full h-full"
+                priority
               />
-            </motion.div>
-
-            {/* Testimonial Content */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.4 }}
-              viewport={{ once: true }}
-              className="flex flex-col text-center md:text-left"
-            >
-              <p className={`text-lg italic ${testimonial.textColor} text-xl md:text-2xl font-semibold`}>
-                "{testimonial.feedback}"
-              </p>
-              <h3 className={`mt-4 text-lg md:text-xl font-bold ${testimonial.textColor}`}>
-                {testimonial.name}
-              </h3>
-              <p className="text-sm text-gray-300">{testimonial.location}</p>
-            </motion.div>
+            </div>
+            <p className={`mt-6 text-lg italic ${testimonialsData[index].textColor} text-xl md:text-2xl font-semibold`}>
+              "{testimonialsData[index].feedback}"
+            </p>
+            <h3 className={`mt-4 text-lg md:text-xl font-bold ${testimonialsData[index].textColor}`}>
+              {testimonialsData[index].name}
+            </h3>
+            <p className="text-sm text-gray-300">{testimonialsData[index].location}</p>
           </motion.div>
-        ))}
+        </AnimatePresence>
       </div>
 
-      {/* Floating Background Elements for Aesthetic Appeal */}
-      <motion.div
-        className="absolute top-0 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-green-400/10 rounded-full blur-3xl opacity-30"
-        animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
-        transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-      ></motion.div>
-
-      <motion.div
-        className="absolute bottom-0 right-1/3 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl opacity-30"
-        animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
-        transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-      ></motion.div>
+      <div className="absolute top-1/2 -translate-y-1/2 w-full flex justify-between px-8">
+        <button
+          onClick={handlePrev}
+          className="text-white bg-gray-800 p-3 rounded-full hover:bg-gray-700"
+          disabled={isAnimating}
+        >
+          <ChevronLeft size={30} />
+        </button>
+        <button
+          onClick={handleNext}
+          className="text-white bg-gray-800 p-3 rounded-full hover:bg-gray-700"
+          disabled={isAnimating}
+        >
+          <ChevronRight size={30} />
+        </button>
+      </div>
     </section>
   );
 };

@@ -39,7 +39,7 @@ const About = () => {
           />
           <h3 className="text-2xl md:text-3xl font-bold mt-6 text-green-400">Your Instructor - IIT Bombay Alumnus</h3>
           <p className="text-md md:text-lg mt-4 text-gray-300 text-justify">
-            With a strong academic background from **IIT Bombay** and **years of experience in AI & Machine Learning**, your instructor is dedicated to helping students **master AI, ML, and Data Science** through hands-on training and real-world projects.
+            With a strong academic background from IIT Bombay and years of experience in AI & Machine Learning, your instructor is dedicated to helping students master AI, ML, and Data Science through hands-on training and real-world projects.
           </p>
         </motion.div>
 
@@ -52,7 +52,7 @@ const About = () => {
           className="md:w-1/2 text-justify"
         >
           <p className="text-lg md:text-xl mb-6">
-            At **Ayomi IT Services & Training Center**, we believe in practical learning. Our instructor ensures that you not only learn AI concepts but also **apply them to real-world projects**. This course is designed for **beginners and professionals** who want to build a career in AI & Data Science.
+          "This AYOMI AI institute is designed and developed under the guidance of the IITian <b><u>"Jitendra Sadangi"</u></b> from IIT Bombay, who was also part of the International Mathematics Olympiad UK 2024 program as an Invigilator and holds IIT JAM AIR 7 Rank. He is also awarded with the Most Prominent Contributors to Innovation February 2023 Award, endorsed by the World Innovation Congress. He has 10+ years of experience."
           </p>
 
           <ul className="list-none space-y-4 text-md md:text-lg">

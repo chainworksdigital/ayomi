@@ -1,7 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Lottie from "lottie-react";
+import dynamic from "next/dynamic";
+
+// Dynamically import Lottie to prevent SSR hydration mismatch
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
+
 import dataScienceAnimation from "../../../public/animations/Card-Animation1.json";
 import aiMlAnimation from "../../../public/animations/Card-Animation2.json";
 import blockchainAnimation from "../../../public/animations/Card-Animation3.json";
@@ -13,7 +17,7 @@ const courses = [
     description:
       "Master data science with hands-on projects, Python, R, and real-world data analysis techniques.",
     animationData: dataScienceAnimation,
-    syllabusLink: "https://drive.google.com/file/d/1G2YV6Hr_HjunKLXOwS5leqL_bgTHgYGt/view",
+    syllabusLink: "https://www.canva.com/design/DAGge2fAunw/M2UomxV5SXblr0WL0LRlbw/view?utm_content=DAGge2fAunw&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hdd60e2ba79",
   },
   {
     id: "ai-ml",
@@ -21,7 +25,7 @@ const courses = [
     description:
       "Learn Artificial Intelligence & Machine Learning with real-world AI applications.",
     animationData: aiMlAnimation,
-    syllabusLink: "https://drive.google.com/file/d/1G2YV6Hr_HjunKLXOwS5leqL_bgTHgYGt/view",
+    syllabusLink: "https://www.canva.com/design/DAGgfBlC2pI/J3qOy0CNkpEusSYTKeAR2w/view?utm_content=DAGgfBlC2pI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h8d9d48e939",
   },
   {
     id: "blockchain",
@@ -29,7 +33,7 @@ const courses = [
     description:
       "Dive into blockchain development, smart contracts, decentralized apps, and cryptocurrency fundamentals.",
     animationData: blockchainAnimation,
-    syllabusLink: "https://drive.google.com/file/d/1G2YV6Hr_HjunKLXOwS5leqL_bgTHgYGt/view",
+    syllabusLink: "https://www.canva.com/design/DAGgfGFm7DM/XoeApVUjq5ag1GMRNjCq5w/view?utm_content=DAGgfGFm7DM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hb7537b69c3",
   },
 ];
 
@@ -75,11 +79,12 @@ const Courses = () => {
             {/* Download Syllabus Button */}
             <motion.a
               whileHover={{ scale: 1.1 }}
+              target="_blank" rel="noopener noreferrer"
               href={course.syllabusLink}
               download
               className="mt-6 inline-block bg-green-500 hover:bg-green-400 text-black font-semibold px-6 py-3 rounded-xl transition-all shadow-md hover:shadow-green-500/50"
             >
-              Download Syllabus
+              View Syllabus
             </motion.a>
           </motion.div>
         ))}

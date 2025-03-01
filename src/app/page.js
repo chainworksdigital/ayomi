@@ -18,9 +18,9 @@ export default function page() {
      <section id="about">
         <About />
       </section>
-      {/* <section id="courses">
+      <section id="courses">
         <Courses />
-      </section> */}
+      </section>
       <section id="testimonials">
         <Testimonials />
       </section>
