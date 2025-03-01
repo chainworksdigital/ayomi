@@ -26,7 +26,10 @@ const Footer = () => {
               📍 <span className="ml-2">Office No 9, Nal Stop, Apex Colony, Erandwane, Pune - 411004</span>
             </p>
             <p className="flex items-center text-gray-400 mt-2">
-              📞 <span className="ml-2">+91 87883 52103</span>
+              📞 <span className="ml-2">For Assistance:+91 87883 52103</span>
+            </p>
+            <p className="flex items-center text-gray-400 mt-2">
+              📞 <span className="ml-2">Front Desk: +91 878-8352103</span>
             </p>
           </div>
         </motion.div>
