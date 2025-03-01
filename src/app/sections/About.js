@@ -56,10 +56,10 @@ const About = () => {
           </p>
 
           <ul className="list-none space-y-4 text-md md:text-lg">
-            <li>✅ Learn **AI, ML & Data Science** with step-by-step guidance</li>
-            <li>✅ Work on **real-world projects** & hands-on labs</li>
-            <li>✅ **Industry-ready skills** – Resume preparation & interview guidance</li>
-            <li>✅ **Live & interactive sessions** with Q&A and practical applications</li>
+            <li>✅ Learn AI, ML & Data Science with step-by-step guidance</li>
+            <li>✅ Work on real-world projects & hands-on labs</li>
+            <li>✅ Industry-ready skills – Resume preparation & interview guidance</li>
+            <li>✅ Live & interactive sessions with Q&A and practical applications</li>
           </ul>
 
           <div className="mt-8 flex justify-center md:justify-start">
