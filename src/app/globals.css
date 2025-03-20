@@ -1,4 +1,8 @@
 @import "tailwindcss";
+html, body {
+  overflow-x: hidden; /* Prevents horizontal scrolling */
+  max-width: 100%;
+}
 
 @theme {
   --font-sans: var(--font-geist-sans);

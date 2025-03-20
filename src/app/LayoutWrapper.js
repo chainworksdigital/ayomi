@@ -1,11 +1,11 @@
-"use client"; // Mark this as a Client Component
+"use client";
 
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Lenis from "@studio-freight/lenis";
 
-// Dynamically import components without SSR (for hydration issues)
-const Navbar = dynamic(() => import("@/app/components/Navbar"), { ssr: false });
+// Dynamic import to avoid SSR issues
+const Navbar = dynamic(() => import("@/app/components/Navbar/Navbar"), { ssr: false });
 const Footer = dynamic(() => import("@/app/components/Footer"), { ssr: false });
 
 export default function LayoutWrapper({ children }) {
@@ -13,15 +13,15 @@ export default function LayoutWrapper({ children }) {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    setIsClient(true); // Ensure we're in the client before applying Lenis
+    setIsClient(true);
   }, []);
 
   useEffect(() => {
-    if (!isClient) return; // Avoid running Lenis during SSR
+    if (!isClient) return;
 
     const lenis = new Lenis({
-      duration: 2.5, // Slows down the scroll effect
-      easing: (t) => 1 - Math.pow(1 - t, 4), // Smooth easing function
+      duration: 2.5,
+      easing: (t) => 1 - Math.pow(1 - t, 4),
       smooth: true,
       smoothTouch: false,
     });

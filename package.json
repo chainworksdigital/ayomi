@@ -11,6 +11,8 @@
   "dependencies": {
     "@netlify/plugin-nextjs": "^5.9.4",
     "@studio-freight/lenis": "^1.0.42",
+    "contentful": "^11.5.9",
+    "dotenv": "^16.4.7",
     "eslint": "^9.21.0",
     "framer-motion": "^10.18.0",
     "gsap": "^3.12.7",

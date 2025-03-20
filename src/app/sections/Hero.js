@@ -13,7 +13,7 @@ const Hero = () => {
   return (
     <section className="relative h-screen flex flex-col items-center justify-center bg-black text-white overflow-hidden">
       {/* Background Glow Effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 via-transparent to-blue-400/20 blur-3xl opacity-50 -z-10"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 via-transparent to-blue-400/20 blur-3xl opacity-50  "></div>
 
       {/* Floating AI Animation (Only One) */}
       <motion.div
@@ -30,7 +30,7 @@ const Hero = () => {
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-        className="text-center mt-6 z-50"
+        className="text-center mt-6  "
       >
         <h1 className="text-5xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-400">
           AI Classes
@@ -42,10 +42,10 @@ const Hero = () => {
         {/* CTA Button (Fixed Clickability) */}
         <motion.a
           whileHover={{ scale: 1.1 }}
-          href="#courses"
-          className="inline-block bg-green-500 hover:bg-green-400 text-black font-semibold px-6 py-3 mt-5 rounded-lg transition-all z-50 relative"
+          href="workshop"
+          className="inline-block bg-green-500 hover:bg-green-400 text-black font-semibold px-6 py-3 mt-5 rounded-lg transition-all   relative"
         >
-          Get Started
+          Join Free Workshop
         </motion.a>
       </motion.div>
 

@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import Lenis from "@studio-freight/lenis";
 
 // Dynamically import components without SSR (for hydration issues)
-const Navbar = dynamic(() => import("@/app/components/Navbar"), { ssr: false });
+const Navbar = dynamic(() => import("@/app/components/Navbar/Navbar"), { ssr: false });
 const Footer = dynamic(() => import("@/app/components/Footer"), { ssr: false });
 
 export default function LayoutWrapper({ children }) {
