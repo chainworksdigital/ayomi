@@ -1,66 +1,73 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import dynamic from 'next/dynamic';
-import Image from 'next/image';
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
+import Image from "next/image";
 
-// Dynamically import the Lottie component to avoid SSR issues
-const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
-// Import your Lottie animation JSON (adjust the path as needed)
-import workshop_animation from '../../../public/animations/workshop.json';
+// Dynamically import the Lottie component
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
+import workshop_animation from "../../../public/animations/workshop.json";
 
 export default function WorkshopPage() {
-  // States for dynamic content
-  const [videoLink, setVideoLink] = useState('');
-  const [webinarDate, setWebinarDate] = useState(null);
-  const [timeLeft, setTimeLeft] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
+  // Webinar data state
+  const [webinarData, setWebinarData] = useState({
+    videoLink: "",
+    webinarDate: new Date("2025-04-01T10:00:00"), // Fallback date
+  });
+  const [loading, setLoading] = useState(true);
+  const [videoError, setVideoError] = useState(false); // Track if the video fails
 
-  // Fetch dynamic data from Contentful via the API route
-  useEffect(() => {
-    fetch('/api/contentful')
-      .then((res) => res.json())
-      .then((data) => {
-        setVideoLink(data.videoLink);
-        setWebinarDate(new Date(data.webinarDate));
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching dynamic content:", err);
-        setIsLoading(false);
-      });
-  }, []);
+  // Countdown timer state
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
-  // Function to calculate remaining time until the webinar starts
-  const calculateTimeLeft = () => {
-    if (!webinarDate) return {};
-    const difference = webinarDate - new Date();
-    let timeObj = {};
-    if (difference > 0) {
-      timeObj = {
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / (1000 * 60)) % 60),
-        seconds: Math.floor((difference / 1000) % 60),
-      };
-    } else {
-      timeObj = { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  // Calculate remaining time
+  const calculateTimeLeft = (targetDate) => {
+    const difference = targetDate - new Date();
+    if (difference <= 0) {
+      return { days: 0, hours: 0, minutes: 0, seconds: 0 };
     }
-    return timeObj;
+    return {
+      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((difference / (1000 * 60)) % 60),
+      seconds: Math.floor((difference / 1000) % 60),
+    };
   };
+
+  // Fetch webinar data from our API route
+  useEffect(() => {
+    async function fetchWebinarData() {
+      try {
+        const res = await fetch("/api/webinar");
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        const data = await res.json();
+        setWebinarData({
+          videoLink: data.videoLink,
+          webinarDate: new Date(data.webinarDate),
+        });
+      } catch (error) {
+        console.error("Error fetching webinar data:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchWebinarData();
+  }, []);
 
   // Update the countdown every second
   useEffect(() => {
-    if (!webinarDate) return;
     const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
+      setTimeLeft(calculateTimeLeft(webinarData.webinarDate));
     }, 1000);
     return () => clearInterval(timer);
-  }, [webinarDate]);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  }, [webinarData.webinarDate]);
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-100 to-purple-100 flex items-center justify-center p-4">
@@ -73,19 +80,29 @@ export default function WorkshopPage() {
           transition={{ duration: 2 }}
         >
           <div className="w-full h-64 md:h-full bg-black flex items-center justify-center">
-            {videoLink ? (
+            {loading ? (
+              <span className="text-white text-center px-4">Loading...</span>
+            ) : videoError || !webinarData.videoLink ? (
+              // Fallback Video if YouTube fails
+              <video
+                src="/videos/fallback.mp4"
+                controls
+                autoPlay
+                className="w-full h-full"
+              >
+                Your browser does not support the video tag.
+              </video>
+            ) : (
+              // YouTube Embed
               <iframe
-                src={videoLink}
+                src={webinarData.videoLink}
                 title="Webinar Video"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 className="w-full h-full"
-              ></iframe>
-            ) : (
-              <span className="text-white text-center px-4">
-                Video Placeholder
-              </span>
+                onError={() => setVideoError(true)} // Trigger fallback if video fails
+              />
             )}
           </div>
         </motion.div>
@@ -115,12 +132,17 @@ export default function WorkshopPage() {
             Free Webinar Seminar
           </h2>
           <p className="mb-6 text-gray-600">
-            Join our free webinar to explore trends in AI & ML, discover how these fields are shaping the world, and learn how to secure a rewarding career.
+            Join our free webinar to explore trends in AI & ML, discover how
+            these fields are shaping the world, and learn how to secure a
+            rewarding career. Engage with our IIT Bombay alumnus instructor and
+            expand your knowledge in an interactive session.
           </p>
 
           {/* Countdown Timer */}
           <div className="mb-6">
-            <h3 className="text-xl font-semibold text-gray-700">Webinar starts in:</h3>
+            <h3 className="text-xl font-semibold text-gray-700">
+              Webinar starts in:
+            </h3>
             <div className="flex space-x-4 text-lg font-mono text-gray-800 mt-2">
               <span>{timeLeft.days}d</span>
               <span>{timeLeft.hours}h</span>
@@ -158,7 +180,8 @@ export default function WorkshopPage() {
               Join Our WhatsApp Group
             </h3>
             <p className="text-sm text-gray-600 mb-2">
-              Scan the QR code or click the link to stay updated on webinar details!
+              Scan the QR code or click the link to stay updated on webinar
+              details!
             </p>
             <div className="flex flex-col items-center">
               <Image
