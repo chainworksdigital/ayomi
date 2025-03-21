@@ -133,7 +133,7 @@ const Testimonials = () => {
         animate={{ opacity: 1, y: 0 }}
         className="text-4xl md:text-5xl font-extrabold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-400"
       >
-        What Our Students Say
+        What Our Students and COO Say
       </motion.h2>
 
       <div className="relative w-full max-w-6xl h-[600px] overflow-hidden">
