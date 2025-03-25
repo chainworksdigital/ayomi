@@ -9,6 +9,10 @@ const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 import dataScienceAnimation from "../../../public/animations/Card-Animation1.json";
 import aiMlAnimation from "../../../public/animations/Card-Animation2.json";
 import blockchainAnimation from "../../../public/animations/Card-Animation3.json";
+// Placeholder animation for new courses
+import Automation from "../../../public/animations/Automation";
+import Full_stack from "../../../public/animations/fullstackdeveloper.json";
+import MERN from "../../../public/animations/MERN.json";
 
 const courses = [
   {
@@ -17,7 +21,8 @@ const courses = [
     description:
       "Master data science with hands-on projects, Python, R, and real-world data analysis techniques.",
     animationData: dataScienceAnimation,
-    syllabusLink: "https://www.canva.com/design/DAGge2fAunw/M2UomxV5SXblr0WL0LRlbw/view?utm_content=DAGge2fAunw&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hdd60e2ba79",
+    syllabusLink:
+      "https://www.canva.com/design/DAGge2fAunw/M2UomxV5SXblr0WL0LRlbw/view?utm_content=DAGge2fAunw&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hdd60e2ba79",
   },
   {
     id: "ai-ml",
@@ -25,7 +30,8 @@ const courses = [
     description:
       "Learn Artificial Intelligence & Machine Learning with real-world AI applications.",
     animationData: aiMlAnimation,
-    syllabusLink: "https://www.canva.com/design/DAGgfBlC2pI/J3qOy0CNkpEusSYTKeAR2w/view?utm_content=DAGgfBlC2pI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h8d9d48e939",
+    syllabusLink:
+      "https://www.canva.com/design/DAGgfBlC2pI/J3qOy0CNkpEusSYTKeAR2w/view?utm_content=DAGgfBlC2pI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h8d9d48e939",
   },
   {
     id: "blockchain",
@@ -33,8 +39,38 @@ const courses = [
     description:
       "Dive into blockchain development, smart contracts, decentralized apps, and cryptocurrency fundamentals.",
     animationData: blockchainAnimation,
-    syllabusLink: "https://www.canva.com/design/DAGgfGFm7DM/XoeApVUjq5ag1GMRNjCq5w/view?utm_content=DAGgfGFm7DM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hb7537b69c3",
+    syllabusLink:
+      "https://www.canva.com/design/DAGgfGFm7DM/XoeApVUjq5ag1GMRNjCq5w/view?utm_content=DAGgfGFm7DM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hb7537b69c3",
   },
+  // New courses without syllabus links
+  {
+    id: "full-stack-developer",
+    title: "Full-stack Developer",
+    description:
+      "Learn front-end and back-end technologies to build complete web applications.",
+    animationData: Full_stack,
+  },
+  {
+    id: "automation-tester",
+    title: "Automation Tester",
+    description:
+      "Master automated testing tools and frameworks for robust software quality assurance.",
+    animationData: Automation,
+  },
+  {
+    id: "mern-stack-developer",
+    title: "MERN Stack Developer",
+    description:
+      "Develop full-stack applications using MongoDB, Express, React, and Node.js.",
+    animationData: MERN,
+  },
+  // {
+  //   id: "ibm-mainrame",
+  //   title: "IBM Mainrame",
+  //   description:
+  //     "Explore legacy systems and modern approaches in IBM mainframe computing.",
+  //   animationData: placeholderAnimation,
+  // },
 ];
 
 const Courses = () => {
@@ -76,16 +112,19 @@ const Courses = () => {
               {course.description}
             </p>
 
-            {/* Download Syllabus Button */}
-            <motion.a
-              whileHover={{ scale: 1.1 }}
-              target="_blank" rel="noopener noreferrer"
-              href={course.syllabusLink}
-              download
-              className="mt-6 inline-block bg-green-500 hover:bg-green-400 text-black font-semibold px-6 py-3 rounded-xl transition-all shadow-md hover:shadow-green-500/50"
-            >
-              View Syllabus
-            </motion.a>
+            {/* Conditionally render the Download Syllabus Button */}
+            {course.syllabusLink && (
+              <motion.a
+                whileHover={{ scale: 1.1 }}
+                target="_blank"
+                rel="noopener noreferrer"
+                href={course.syllabusLink}
+                download
+                className="mt-6 inline-block bg-green-500 hover:bg-green-400 text-black font-semibold px-6 py-3 rounded-xl transition-all shadow-md hover:shadow-green-500/50"
+              >
+                View Syllabus
+              </motion.a>
+            )}
           </motion.div>
         ))}
       </div>
