@@ -22,7 +22,7 @@ export async function POST(request) {
 
     // 4. Your Twilio "From" number (Sandbox or production)
     //    e.g., 'whatsapp:+14155238886' for sandbox
-    const fromNumber = 'whatsapp:+14155238886';
+    const fromNumber = 'whatsapp:+14155238886'; 
     const toNumber = `whatsapp:${mobileNumber}`;
 
     // 5. Construct the WhatsApp message

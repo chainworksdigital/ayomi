@@ -83,12 +83,15 @@ const Navbar = () => {
       className="fixed w-full top-0 left-0 z-50 bg-gradient-to-r from-black via-gray-900 to-black bg-opacity-90 backdrop-blur-lg shadow-lg"
     >
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <motion.h1
-          whileHover={{ scale: 1.1 }}
-          className="text-3xl font-extrabold text-green-400 tracking-wide cursor-pointer"
-        >
-          AYOMI
-        </motion.h1>
+      <motion.h1
+  whileHover={{ scale: 1.1 }}
+  className="text-3xl font-extrabold text-green-400 tracking-wide cursor-pointer"
+>
+  <NextLink href="/#Home">
+    AYOMI
+  </NextLink>
+</motion.h1>
+
         <DesktopMenu navItems={navItems} active={active} renderNavLink={renderNavLink} />
         <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X size={28} /> : <Menu size={28} />}
