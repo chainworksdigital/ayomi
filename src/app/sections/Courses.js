@@ -21,8 +21,8 @@ const courses = [
     description:
       "Master data science with hands-on projects, Python, R, and real-world data analysis techniques.",
     animationData: dataScienceAnimation,
-    syllabusLink:
-      "https://www.canva.com/design/DAGge2fAunw/M2UomxV5SXblr0WL0LRlbw/view?utm_content=DAGge2fAunw&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hdd60e2ba79",
+    // syllabusLink:
+      // "https://www.canva.com/design/DAGge2fAunw/M2UomxV5SXblr0WL0LRlbw/view?utm_content=DAGge2fAunw&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hdd60e2ba79",
   },
   {
     id: "ai-ml",
@@ -30,8 +30,8 @@ const courses = [
     description:
       "Learn Artificial Intelligence & Machine Learning with real-world AI applications.",
     animationData: aiMlAnimation,
-    syllabusLink:
-      "https://www.canva.com/design/DAGgfBlC2pI/J3qOy0CNkpEusSYTKeAR2w/view?utm_content=DAGgfBlC2pI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h8d9d48e939",
+    // syllabusLink:
+      // "https://www.canva.com/design/DAGgfBlC2pI/J3qOy0CNkpEusSYTKeAR2w/view?utm_content=DAGgfBlC2pI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h8d9d48e939",
   },
   {
     id: "blockchain",
@@ -39,8 +39,8 @@ const courses = [
     description:
       "Dive into blockchain development, smart contracts, decentralized apps, and cryptocurrency fundamentals.",
     animationData: blockchainAnimation,
-    syllabusLink:
-      "https://www.canva.com/design/DAGgfGFm7DM/XoeApVUjq5ag1GMRNjCq5w/view?utm_content=DAGgfGFm7DM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hb7537b69c3",
+  // /  syllabusLink:
+    // /  "https://www.canva.com/design/DAGgfGFm7DM/XoeApVUjq5ag1GMRNjCq5w/view?utm_content=DAGgfGFm7DM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hb7537b69c3",
   },
   // New courses without syllabus links
   {

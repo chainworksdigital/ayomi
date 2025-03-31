@@ -8,10 +8,10 @@ const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 import workshop_animation from "../../../public/animations/workshop.json";
 
 export default function WorkshopPage() {
-  // State for webinar data, loading, and countdown timer
+  // Webinar data, loading, and countdown timer state
   const [webinarData, setWebinarData] = useState({
     videoLink: "",
-    webinarDate: new Date("2025-04-01T10:00:00"), // Fallback date
+    webinarDate: new Date("2025-06-01T10:00:00"), // Fallback date
   });
   const [loading, setLoading] = useState(true);
   const [timeLeft, setTimeLeft] = useState({
@@ -21,7 +21,15 @@ export default function WorkshopPage() {
     seconds: 0,
   });
 
-  // Helper function: Calculate remaining time
+  // Form state and submission status
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+  });
+  const [submitStatus, setSubmitStatus] = useState("");
+
+  // Helper: Calculate remaining time
   const calculateTimeLeft = (targetDate) => {
     const difference = targetDate - new Date();
     if (difference <= 0) {
@@ -35,7 +43,7 @@ export default function WorkshopPage() {
     };
   };
 
-  // Fetch webinar data from your API (if needed for countdown or other elements)
+  // Fetch webinar data from API
   useEffect(() => {
     async function fetchWebinarData() {
       try {
@@ -65,11 +73,37 @@ export default function WorkshopPage() {
     return () => clearInterval(timer);
   }, [webinarData.webinarDate]);
 
+  // Form change handler
+  const handleChange = (e) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  // Form submission handler
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitStatus("Submitting...");
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (!res.ok) {
+        throw new Error("Failed to submit form");
+      }
+      setSubmitStatus("Submitted successfully!");
+      setFormData({ name: "", email: "", phone: "" });
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setSubmitStatus("Submission failed. Please try again.");
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-100 to-purple-100 pt-18 px-4">
-      <div className="max-w-7xl mx-auto bg-white/70 backdrop-blur-md rounded-xl shadow-2xl p-8 pb-15">
-        {/* Top Section: Text on Left & Timer on Right */}
-        <div className="flex flex-col md:flex-row items-center justify-between border-b border-gray-300 pb-6 mb-8">
+    <div className="min-h-screen bg-gradient-to-r from-gray-900 to-black  pt-22 pb-12 mt-4 px-4">
+      <div className="max-w-7xl mx-auto bg-gray-800/90 backdrop-blur-md rounded-xl  shadow-2xl p-8 pb-15">
+        {/* Top Section: Seminar Text & Countdown Timer */}
+        <div className="flex flex-col md:flex-row items-center justify-between border-b mb-4 border-gray-600 pb-6 mb-8">
           {/* Left: Seminar Text */}
           <motion.div
             className="md:w-1/2 text-left"
@@ -77,13 +111,11 @@ export default function WorkshopPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
           >
-            <h1 className="text-4xl font-bold text-gray-800 mb-4">
-              Free Webinar Seminar
+            <h1 className="text-4xl font-bold text-white mb-4">
+              Free Lightning Webinar
             </h1>
-            <p className="text-xl text-gray-700">
-              Join our free webinar to explore trends in AI &amp; ML, discover how
-              these fields are shaping the world, and learn how to secure a rewarding
-              career.
+            <p className="text-xl text-gray-300">
+              Experience the electrifying trends in AI &amp; ML. Discover how lightning-fast insights are shaping our future.
             </p>
           </motion.div>
           {/* Right: Countdown Timer */}
@@ -93,11 +125,11 @@ export default function WorkshopPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
           >
-            <div className="bg-gray-100 rounded-lg px-6 py-4 shadow-md">
-              <h3 className="text-2xl font-semibold text-gray-700 mb-2">
+            <div className="bg-gray-700 rounded-lg px-6 py-4 shadow-md">
+              <h3 className="text-2xl font-semibold text-white mb-2">
                 Starts In:
               </h3>
-              <div className="flex space-x-4 text-3xl font-mono text-gray-800">
+              <div className="flex space-x-4 text-3xl font-mono text-white">
                 <span>{timeLeft.days}d</span>
                 <span>{timeLeft.hours}h</span>
                 <span>{timeLeft.minutes}m</span>
@@ -109,91 +141,102 @@ export default function WorkshopPage() {
 
         {/* Bottom Section: Two-Column Layout */}
         <div className="flex flex-col md:flex-row gap-8">
-          {/* Left Column: Offline Video & Animation */}
-          <div className="flex-1 space-y-6">
-            {/* Video Section – Only Offline Video in Portrait */}
+          {/* Left Column: Video */}
+          <div className="flex-1">
             <motion.div
-  className="relative w-full max-w-[360px] aspect-[9/16] mx-auto overflow-hidden rounded-lg shadow-lg bg-black"
-  initial={{ opacity: 0, y: -10 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 1 }}
->
-  <video
-    controls
-    autoPlay
-    className="absolute inset-0 w-full h-full object-contain"
-    poster="/images/video_placeholder.png"
-  >
-    <source src="/VIDEOS/webinar.MP4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-</motion.div>
-{/* Lottie Animation */}
-            <motion.div
-              className="relative w-full h-64 md:h-80 overflow-hidden rounded-lg shadow-lg bg-white flex items-center justify-center"
+              className="relative w-full max-w-[360px] aspect-[9/16] mx-auto overflow-hidden rounded-lg shadow-lg bg-black"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.2 }}
+              transition={{ duration: 1 }}
             >
-              <Lottie
-                animationData={workshop_animation}
-                loop={true}
-                className="w-full h-full"
-              />
+              <video
+                controls
+                autoPlay
+                className="absolute inset-0 w-full h-full object-contain"
+                poster="/images/video_placeholder.png"
+              >
+                <source src="/VIDEOS/webinar.MP4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             </motion.div>
           </div>
 
-          {/* Right Column: WhatsApp Join Section & Google Form */}
+          {/* Right Column: Registration Form with Lottie Animation Below */}
           <motion.div
-            className="flex-1 relative overflow-hidden rounded-lg shadow-lg bg-white flex flex-col"
+            className="flex-1 relative overflow-hidden rounded-lg shadow-lg bg-gray-900 flex flex-col"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
-            {/* WhatsApp Join Section with QR Code */}
-            <div className="p-8 text-center border-b border-gray-300">
-              <h2 className="text-2xl font-bold mb-4">
-                Want to join our WhatsApp group?
+            <div className="p-8">
+              <h2 className="text-2xl font-bold mb-6 text-center text-white">
+                Register for Webinar
               </h2>
-              <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-                <a
-                  href="https://chat.whatsapp.com/KOCTAdvOQmfCeKRTvz6lxL"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5"
-                >
-                  {/* WhatsApp Logo SVG */}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-5 h-5 mr-2"
-                    viewBox="0 0 448 512"
-                    fill="currentColor"
-                  >
-                    <path d="M380.9 97.1C339-2.6 237.2-21.2 151.8 20.9c-44.4 20.4-81.9 55-103.2 98.4-21.2 43.4-23.3 93.7-7 137.2L2.3 484.5c-3.6 12.6 8.7 24.7 21.3 21.1L125 446.3c38.4 19.5 81.9 30 127.3 30 85.4 0 187.3-24.1 229.1-130.9 41.9-106.9 15.8-222.8-56.5-278.3zM224 405.3c-37.8 0-74.8-10-107.7-28.8l-7.7-4.5-70.5 27.8 27.8-70.5-4.5-7.7C60.7 300.8 50.7 263.8 50.7 226c0-107.5 87.3-194.8 194.8-194.8S440.3 118.5 440.3 226 353 420.1 224 420.1zM308.3 308.3c-5.2 14.5-26.2 27.1-33.1 28.3-8.6 1.6-16.2 2.3-23.9-2.3-7.7-4.5-31-14.8-59.2-36.4-21.9-17.4-36.7-38.4-41.1-46.1-4.5-7.7-0.5-11.9 3.4-16.2 3.8-3.8 8.6-9.5 12.9-14.3 4.3-4.8 5.8-7.7 8.7-12.9 2.9-5.2 1.5-9.7-0.8-14.3-2.3-4.5-23.1-55.7-31.8-76.2-8.3-18.4-16.8-15.9-23.2-16.2-6.1-0.3-13.2-0.3-20.2-0.3-7.7 0-20.2 2.9-30.9 14.6-10.7 11.7-40.8 39.8-40.8 97 0 57.2 41.8 112.3 47.6 119.9 5.8 7.7 81.6 124.3 197.9 124.3 116.3 0 193.5-114.5 203.4-124.3 9.8-9.8 15.1-19.3 19.5-33.1 4.3-13.8 4.3-25.7 2.9-33.3z" />
-                  </svg>
-                  Join WhatsApp Group
-                </a>
-                {/* QR Code Image */}
-                <div className="w-32 h-32 md:w-40 md:h-40">
-                  <img
-                    src="/images/Ayomi_whatsapp.png"
-                    alt="WhatsApp QR Code"
-                    className="w-full h-full object-contain rounded-lg shadow-md"
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-300">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="mt-1 block w-full rounded-md border border-blue-500 bg-gray-800 px-4 py-2 shadow-sm transition duration-200 ease-in-out focus:border-blue-400 focus:ring-blue-400"
                   />
                 </div>
-              </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-300">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="mt-1 block w-full rounded-md border border-blue-500 bg-gray-800 px-4 py-2 shadow-sm transition duration-200 ease-in-out focus:border-blue-400 focus:ring-blue-400"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-300">
+                    Phone (WhatsApp)
+                  </label>
+                  <input
+                    type="text"
+                    name="phone"
+                    id="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    required
+                    className="mt-1 block w-full rounded-md border border-blue-500 bg-gray-800 px-4 py-2 shadow-sm transition duration-200 ease-in-out focus:border-blue-400 focus:ring-blue-400"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full py-2 px-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition duration-200 ease-in-out rounded-md text-white font-semibold shadow-lg"
+                >
+                  Submit
+                </button>
+              </form>
+              {submitStatus && (
+                <p className="mt-4 text-center text-sm font-medium text-white">
+                  {submitStatus}
+                </p>
+              )}
             </div>
-            {/* Google Form */}
-            <iframe
-              src="https://docs.google.com/forms/d/e/1FAIpQLSdDRINBdddoTTZtAUXjJSJvPiAOxrWBfVkg3ZdvmnxnPiExOg/viewform?embedded=true"
-              width="100%"
-              frameBorder="0"
-              marginHeight="0"
-              marginWidth="0"
-              className="w-full h-[1000px] md:h-[1000px]"
+            {/* Lottie Animation Below the Form */}
+            <motion.div
+              className="w-full h-48 md:h-56 mt-4"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.2 }}
             >
-              Loading Form...
-            </iframe>
+              <Lottie animationData={workshop_animation} loop className="w-full h-full" />
+            </motion.div>
           </motion.div>
         </div>
       </div>
