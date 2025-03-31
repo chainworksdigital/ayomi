@@ -100,8 +100,8 @@ export default function WorkshopPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-gray-900 to-black  pt-22 pb-12 mt-4 px-4">
-      <div className="max-w-7xl mx-auto bg-gray-800/90 backdrop-blur-md rounded-xl  shadow-2xl p-8 pb-15">
+    <div className="min-h-screen bg-gradient-to-r from-gray-900 to-black pt-22 pb-12 mt-4 px-4">
+      <div className="max-w-7xl mx-auto bg-gray-800/90 backdrop-blur-md rounded-xl shadow-2xl p-8 pb-15">
         {/* Top Section: Seminar Text & Countdown Timer */}
         <div className="flex flex-col md:flex-row items-center justify-between border-b mb-4 border-gray-600 pb-6 mb-8">
           {/* Left: Seminar Text */}
@@ -184,8 +184,8 @@ export default function WorkshopPage() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="mt-1 block w-full rounded-md border border-blue-500 bg-gray-800 px-4 py-2 shadow-sm transition duration-200 ease-in-out focus:border-blue-400 focus:ring-blue-400"
-                  />
+                    className="mt-1 block w-full rounded-md border border-blue-500 bg-gray-800 px-4 py-2 shadow-sm transition duration-200 ease-in-out focus:bg-gray-200 focus:text-black focus:border-blue-400 focus:ring-blue-400"
+                    />
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-300">
@@ -198,8 +198,8 @@ export default function WorkshopPage() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="mt-1 block w-full rounded-md border border-blue-500 bg-gray-800 px-4 py-2 shadow-sm transition duration-200 ease-in-out focus:border-blue-400 focus:ring-blue-400"
-                  />
+                    className="mt-1 block w-full rounded-md border border-blue-500 bg-gray-800 px-4 py-2 shadow-sm transition duration-200 ease-in-out focus:bg-gray-200 focus:text-black focus:border-blue-400 focus:ring-blue-400"
+                    />
                 </div>
                 <div>
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-300">
@@ -212,13 +212,14 @@ export default function WorkshopPage() {
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    className="mt-1 block w-full rounded-md border border-blue-500 bg-gray-800 px-4 py-2 shadow-sm transition duration-200 ease-in-out focus:border-blue-400 focus:ring-blue-400"
+                    className="mt-1 block w-full rounded-md border border-blue-500 bg-gray-800 px-4 py-2 shadow-sm transition duration-200 ease-in-out focus:bg-gray-200 focus:text-black focus:border-blue-400 focus:ring-blue-400"
+                  
                   />
                 </div>
                 <button
                   type="submit"
-                  className="w-full py-2 px-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition duration-200 ease-in-out rounded-md text-white font-semibold shadow-lg"
-                >
+                  className="mt-1 block w-full rounded-md border border-blue-500 bg-gray-800 px-4 py-2 shadow-sm transition duration-200 ease-in-out focus:bg-gray-200 focus:text-black focus:border-blue-400 focus:ring-blue-400"
+                  >
                   Submit
                 </button>
               </form>

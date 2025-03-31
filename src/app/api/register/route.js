@@ -8,11 +8,9 @@ export async function POST(request) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
     
-    // Get the Google Apps Script URL from environment variables
-    const googleAppsScriptUrl = process.env.GOOGLE_APPS_SCRIPT_URL;
+     const googleAppsScriptUrl = process.env.GOOGLE_APPS_SCRIPT_URL;
     
-    // Forward the form data to the Google Apps Script web app
-    const scriptRes = await fetch(googleAppsScriptUrl, {
+     const scriptRes = await fetch(googleAppsScriptUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, phone }),

@@ -4,8 +4,10 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 
-// Dynamically import Lottie to prevent SSR issues
+// Dynamically import Lottie to prevent SSR hydration mismatch
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
+
+// Import Lottie Animation
 import blockchainAnimation from "../../../public/animations/Card-Animation5.json";
 
 const Contact = () => {
@@ -15,9 +17,10 @@ const Contact = () => {
     mobile: "",
     message: "",
   });
+
   const [status, setStatus] = useState("");
 
-  // Handle input changes
+  // Handle form input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -28,8 +31,7 @@ const Contact = () => {
     setStatus("Sending...");
 
     try {
-      // Send form data to your Next.js API route (see Step 2)
-      const response = await fetch("/api/contact", {
+      const response = await fetch("/api/sendEmail", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -93,7 +95,8 @@ const Contact = () => {
           className="relative flex flex-col space-y-6 w-full max-w-lg bg-gray-900/95 p-8 rounded-lg shadow-lg border border-gray-700 z-50"
           onSubmit={handleSubmit}
         >
-          <input
+{/* Name */}
+<input
             type="text"
             name="name"
             placeholder="Your Name"
@@ -102,6 +105,8 @@ const Contact = () => {
             value={formData.name}
             onChange={handleChange}
           />
+
+          {/* Email */}
           <input
             type="email"
             name="email"
@@ -111,6 +116,8 @@ const Contact = () => {
             value={formData.email}
             onChange={handleChange}
           />
+
+          {/* Mobile Number */}
           <input
             type="tel"
             name="mobile"
@@ -120,6 +127,8 @@ const Contact = () => {
             value={formData.mobile}
             onChange={handleChange}
           />
+
+          {/* Message */}
           <textarea
             name="message"
             placeholder="Your Message"
@@ -129,13 +138,13 @@ const Contact = () => {
             value={formData.message}
             onChange={handleChange}
           ></textarea>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            className="w-full py-3 px-4 bg-green-500 hover:bg-green-400 transition duration-200 ease-in-out rounded-md text-black font-semibold"
-            type="submit"
-          >
+
+          {/* Submit Button */}
+          <motion.button whileHover={{ scale: 1.05 }} className="w-full py-3 bg-green-500 hover:bg-green-400 text-black font-semibold rounded-lg transition-all z-50" type="submit">
             Send Message 🚀
           </motion.button>
+
+          {/* Status Message */}
           {status && <p className="text-center text-lg text-green-300 mt-4">{status}</p>}
         </motion.form>
       </div>
