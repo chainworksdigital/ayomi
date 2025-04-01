@@ -2,11 +2,12 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { SiInstagram } from "react-icons/si";
 import { usePathname } from "next/navigation";
 import { Link as ScrollLink } from "react-scroll";
 import NextLink from "next/link";
-import DesktopMenu from "./DesktopMenu.js";
-import MobileMenu from "./MobileMenu.js";
+import DesktopMenu from "./DesktopMenu";
+import MobileMenu from "./MobileMenu";
 
 const navItems = [
   { name: "Home", id: "home" },
@@ -83,19 +84,48 @@ const Navbar = () => {
       className="fixed w-full top-0 left-0 z-50 bg-gradient-to-r from-black via-gray-900 to-black bg-opacity-90 backdrop-blur-lg shadow-lg"
     >
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-      <motion.h1
-  whileHover={{ scale: 1.1 }}
-  className="text-3xl font-extrabold text-green-400 tracking-wide cursor-pointer"
->
-  <NextLink href="/#Home">
-    AYOMI
-  </NextLink>
-</motion.h1>
-
-        <DesktopMenu navItems={navItems} active={active} renderNavLink={renderNavLink} />
-        <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
+        <motion.h1
+          whileHover={{ scale: 1.1 }}
+          className="text-3xl font-extrabold text-green-400 tracking-wide cursor-pointer"
+        >
+          <NextLink href="/#Home">
+            AYOMI
+          </NextLink>
+        </motion.h1>
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center space-x-8">
+          <DesktopMenu
+            navItems={navItems}
+            active={active}
+            renderNavLink={renderNavLink}
+          />
+          <NextLink
+            href="https://www.instagram.com/ayomi_aitraining/"
+            legacyBehavior
+          >
+            <a>
+              <div className="p-1 rounded-full bg-gradient-to-r from-pink-500 via-yellow-500 to-purple-500">
+                <SiInstagram size={20} color="white" />
+              </div>
+            </a>
+          </NextLink>
+        </div>
+        {/* Mobile Navigation */}
+        <div className="flex items-center md:hidden space-x-4">
+          <NextLink
+            href="https://www.instagram.com/ayomi_aitraining/"
+            legacyBehavior
+          >
+            <a>
+              <div className="p-1 rounded-full bg-gradient-to-r from-pink-500 via-yellow-500 to-purple-500">
+                <SiInstagram size={20} color="white" />
+              </div>
+            </a>
+          </NextLink>
+          <button onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
       </div>
       <MobileMenu
         navItems={navItems}

@@ -23,6 +23,7 @@
     "nodemailer": "^6.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^5.5.0",
     "react-lazy-load": "^4.0.1",
     "react-scroll": "^1.9.3",
     "twilio": "^5.5.1"
