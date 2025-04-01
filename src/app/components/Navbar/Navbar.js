@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { SiInstagram } from "react-icons/si";
+import { FaFacebookF } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { Link as ScrollLink } from "react-scroll";
 import NextLink from "next/link";
@@ -99,16 +100,28 @@ const Navbar = () => {
             active={active}
             renderNavLink={renderNavLink}
           />
-          <NextLink
-            href="https://www.instagram.com/ayomi_aitraining/"
-            legacyBehavior
-          >
-            <a>
-              <div className="p-1 rounded-full bg-gradient-to-r from-pink-500 via-yellow-500 to-purple-500">
-                <SiInstagram size={20} color="white" />
-              </div>
-            </a>
-          </NextLink>
+          <div className="flex items-center space-x-4">
+            <NextLink
+              href="https://www.instagram.com/ayomi_aitraining/"
+              legacyBehavior
+            >
+              <a>
+                <div className="p-1 rounded-full bg-gradient-to-r from-pink-500 via-yellow-500 to-purple-500">
+                  <SiInstagram size={20} color="white" />
+                </div>
+              </a>
+            </NextLink>
+            <NextLink
+              href="https://www.facebook.com/profile.php?id=61574767611396"
+              legacyBehavior
+            >
+              <a>
+                <div className="p-1 rounded-full bg-gradient-to-r from-blue-500 to-blue-700">
+                  <FaFacebookF size={20} color="white" />
+                </div>
+              </a>
+            </NextLink>
+          </div>
         </div>
         {/* Mobile Navigation */}
         <div className="flex items-center md:hidden space-x-4">
@@ -122,8 +135,18 @@ const Navbar = () => {
               </div>
             </a>
           </NextLink>
+          <NextLink
+            href="https://www.facebook.com/profile.php?id=61574767611396"
+            legacyBehavior
+          >
+            <a>
+              <div className="p-1 rounded-full bg-gradient-to-r from-blue-500 to-blue-700">
+                <FaFacebookF size={20} color="white" />
+              </div>
+            </a>
+          </NextLink>
           <button onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
+            {isOpen ? <X size={28} color="white" /> : <Menu size={28} color="white" />}
           </button>
         </div>
       </div>
