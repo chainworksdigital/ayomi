@@ -186,7 +186,7 @@ export default function WorkshopPage() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="mt-1 block w-full rounded-md border border-blue-500 bg-gray-800 px-4 py-2 shadow-sm transition duration-200 ease-in-out focus:bg-gray-200 focus:text-black focus:border-blue-400 focus:ring-blue-400"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your Name"
                   />
                 </div>
                 <div>
@@ -200,13 +200,16 @@ export default function WorkshopPage() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="mt-1 block w-full rounded-md border border-blue-500 bg-gray-800 px-4 py-2 shadow-sm transition duration-200 ease-in-out focus:bg-gray-200 focus:text-black focus:border-blue-400 focus:ring-blue-400"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your email"
                   />
                 </div>
                 <div>
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-300">
                     Phone (WhatsApp)
                   </label>
+
+
+                  
                   <input
                     type="text"
                     name="phone"
@@ -214,12 +217,12 @@ export default function WorkshopPage() {
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    className="mt-1 block w-full rounded-md border border-blue-500 bg-gray-800 px-4 py-2 shadow-sm transition duration-200 ease-in-out focus:bg-gray-200 focus:text-black focus:border-blue-400 focus:ring-blue-400"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your WhatsApp Number"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="mt-1 block w-full rounded-md border border-blue-500 bg-purple-800 px-4 py-2 shadow-sm transition duration-200 ease-in-out focus:bg-gray-200 focus:text-black focus:border-blue-400 focus:ring-blue-400"
+                  className="bg-blue-500 w-full hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
                 >
                   Register Free
                 </button>
