@@ -157,7 +157,7 @@ export default function WorkshopPage() {
                 className="absolute inset-0 w-full h-full object-contain"
                 poster="/images/video_placeholder.png"
               >
-                <source src="/VIDEOS/webinar.MP4" type="video/mp4" />
+                <source src="/VIDEOS/Ayomi_video.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </motion.div>
