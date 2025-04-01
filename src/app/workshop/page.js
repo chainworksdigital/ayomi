@@ -78,7 +78,7 @@ export default function WorkshopPage() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // Form submission handler
+  // Form submission handler with redirection on success
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitStatus("Submitting...");
@@ -93,6 +93,8 @@ export default function WorkshopPage() {
       }
       setSubmitStatus("Submitted successfully!");
       setFormData({ name: "", email: "", phone: "" });
+      // Redirect to WhatsApp group on successful submission
+      window.open("https://chat.whatsapp.com/IseaKiMsBzz5SfNbOmOCt6", "_blank");
     } catch (error) {
       console.error("Error submitting form:", error);
       setSubmitStatus("Submission failed. Please try again.");
@@ -185,7 +187,7 @@ export default function WorkshopPage() {
                     onChange={handleChange}
                     required
                     className="mt-1 block w-full rounded-md border border-blue-500 bg-gray-800 px-4 py-2 shadow-sm transition duration-200 ease-in-out focus:bg-gray-200 focus:text-black focus:border-blue-400 focus:ring-blue-400"
-                    />
+                  />
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-300">
@@ -199,7 +201,7 @@ export default function WorkshopPage() {
                     onChange={handleChange}
                     required
                     className="mt-1 block w-full rounded-md border border-blue-500 bg-gray-800 px-4 py-2 shadow-sm transition duration-200 ease-in-out focus:bg-gray-200 focus:text-black focus:border-blue-400 focus:ring-blue-400"
-                    />
+                  />
                 </div>
                 <div>
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-300">
@@ -213,14 +215,13 @@ export default function WorkshopPage() {
                     onChange={handleChange}
                     required
                     className="mt-1 block w-full rounded-md border border-blue-500 bg-gray-800 px-4 py-2 shadow-sm transition duration-200 ease-in-out focus:bg-gray-200 focus:text-black focus:border-blue-400 focus:ring-blue-400"
-                  
                   />
                 </div>
                 <button
                   type="submit"
-                  className="mt-1 block w-full rounded-md border border-blue-500 bg-gray-800 px-4 py-2 shadow-sm transition duration-200 ease-in-out focus:bg-gray-200 focus:text-black focus:border-blue-400 focus:ring-blue-400"
-                  >
-                  Submit
+                  className="mt-1 block w-full rounded-md border border-blue-500 bg-purple-800 px-4 py-2 shadow-sm transition duration-200 ease-in-out focus:bg-gray-200 focus:text-black focus:border-blue-400 focus:ring-blue-400"
+                >
+                  Register Free
                 </button>
               </form>
               {submitStatus && (
