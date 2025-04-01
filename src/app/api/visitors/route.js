@@ -1,8 +1,13 @@
-// app/api/visitors/route.js
-import { kv } from '@vercel/kv'; // Make sure you have installed and set up @vercel/kv if you're using it
+// src/app/api/visitors/route.js
+import { Redis } from '@upstash/redis';
+
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN,
+});
 
 export async function GET() {
-  let count = await kv.get('visitorCount');
+  let count = await redis.get('visitorCount');
   count = count ? parseInt(count, 10) : 0;
   return new Response(JSON.stringify({ count }), {
     status: 200,
@@ -11,7 +16,7 @@ export async function GET() {
 }
 
 export async function POST() {
-  const count = await kv.incr('visitorCount');
+  const count = await redis.incr('visitorCount');
   return new Response(JSON.stringify({ count }), {
     status: 200,
     headers: { 'Content-Type': 'application/json' },
