@@ -48,7 +48,18 @@ const Footer = () => {
 
       {/* Bottom Section */}
       <div className="text-center text-gray-500 text-sm mt-6">
-        © {new Date().getFullYear()} Ayomi IT Services. All Rights Reserved.
+        <p>© {new Date().getFullYear()} Ayomi IT Services. All Rights Reserved.</p>
+        <p>
+          Visitors Count:{" "}
+          <a
+            href="https://app.ayomi.ai/visitors"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-green-400 underline"
+          >
+            View Here
+          </a>
+        </p>
       </div>
     </footer>
   );
