@@ -1,4 +1,3 @@
-// src/app/visitors/page.jsx
 "use client";
 import { useEffect, useState } from 'react';
 
@@ -7,13 +6,26 @@ export default function VisitorsPage() {
 
   useEffect(() => {
     async function updateVisitorCount() {
-      // Increment the counter on visit
-      await fetch('/api/visitors', { method: 'POST' });
-      // Fetch the updated count
-      const res = await fetch('/api/visitors');
-      const data = await res.json();
-      setVisitorCount(data.count);
+      try {
+        // POST request to increment
+        const postRes = await fetch('/api/visitors', { method: 'POST' });
+        if (!postRes.ok) {
+          throw new Error(`POST /api/visitors failed: ${postRes.statusText}`);
+        }
+
+        // GET request to read updated count
+        const getRes = await fetch('/api/visitors');
+        if (!getRes.ok) {
+          throw new Error(`GET /api/visitors failed: ${getRes.statusText}`);
+        }
+
+        const data = await getRes.json();
+        setVisitorCount(data.count);
+      } catch (error) {
+        console.error('Error updating visitor count:', error);
+      }
     }
+
     updateVisitorCount();
   }, []);
 
@@ -24,7 +36,7 @@ export default function VisitorsPage() {
           Ayomi Visitors Count
         </h1>
         <p className="text-xl text-gray-600 mb-6">
-          Thank you for visiting our site!
+          Thank you for visiting our site!!!
         </p>
         <div className="bg-gray-100 rounded-full py-4 px-8 inline-block">
           <span className="text-4xl font-bold text-indigo-600">
